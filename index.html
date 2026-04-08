@@ -1,0 +1,945 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>EXPERT NETWORK // DAILY BRIEFING — 15 MAR 2026</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap');
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background-color: #0a0e17;
+            color: #c9d1d9;
+            line-height: 1.6;
+        }
+
+        a { color: #22d3ee; text-decoration: none; }
+        a:hover { color: #67e8f9; text-decoration: underline; }
+
+        .container { max-width: 960px; margin: 0 auto; padding: 0; }
+
+        /* Classification Bar */
+        .class-bar {
+            background: #0d1117;
+            border-bottom: 1px solid #1c2433;
+            padding: 6px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #4b5563;
+        }
+        .class-bar .status { color: #10b981; }
+        .class-bar .status::before { content: ''; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: #10b981; margin-right: 6px; animation: pulse 2s infinite; }
+        @keyframes pulse { 0%, 100% { opacity: 1; } 50% { opacity: 0.4; } }
+
+        /* Header */
+        .header {
+            background: linear-gradient(180deg, #0d1117 0%, #111827 100%);
+            padding: 32px 24px 24px;
+            border-bottom: 1px solid #1c2433;
+        }
+        .header h1 {
+            font-family: 'Inter', sans-serif;
+            font-size: 24px;
+            font-weight: 700;
+            color: #e5e7eb;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            margin-bottom: 4px;
+        }
+        .header h1 span { color: #22d3ee; }
+        .header .subtitle {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            color: #6b7280;
+            letter-spacing: 1px;
+            margin-bottom: 16px;
+        }
+        .header-stats {
+            display: flex;
+            gap: 24px;
+            flex-wrap: wrap;
+        }
+        .header-stat {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #4b5563;
+        }
+        .header-stat strong { color: #22d3ee; font-weight: 600; }
+
+        /* Sections */
+        .section {
+            background: #111827;
+            border: 1px solid #1c2433;
+            margin: 16px;
+            border-radius: 3px;
+            overflow: hidden;
+        }
+        .section-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid #1c2433;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f1419;
+        }
+        .section-header h2 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            color: #e5e7eb;
+        }
+        .section-header .indicator {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            padding: 3px 10px;
+            border-radius: 2px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .indicator.critical { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .indicator.active { background: rgba(34,211,238,0.1); color: #22d3ee; border: 1px solid rgba(34,211,238,0.2); }
+        .indicator.count { background: rgba(75,85,99,0.3); color: #9ca3af; border: 1px solid #1c2433; }
+
+        .section-body { padding: 20px; }
+
+        /* News Brief */
+        .news-grid { display: grid; gap: 16px; }
+        .news-card {
+            background: #0d1117;
+            border: 1px solid #1c2433;
+            border-radius: 3px;
+            padding: 16px;
+            border-left: 3px solid;
+        }
+        .news-card.geo { border-left-color: #ef4444; }
+        .news-card.energy { border-left-color: #f59e0b; }
+        .news-card.fin { border-left-color: #22d3ee; }
+        .news-card .news-tag {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .news-card.geo .news-tag { color: #ef4444; }
+        .news-card.energy .news-tag { color: #f59e0b; }
+        .news-card.fin .news-tag { color: #22d3ee; }
+        .news-card h4 { font-size: 14px; font-weight: 600; color: #e5e7eb; margin-bottom: 8px; }
+        .news-card p { font-size: 13px; color: #9ca3af; line-height: 1.65; }
+
+        /* Stat Row */
+        .stat-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 12px; margin-top: 16px; }
+        .stat-card {
+            background: #0d1117;
+            border: 1px solid #1c2433;
+            border-radius: 3px;
+            padding: 14px;
+            text-align: center;
+        }
+        .stat-card .stat-value {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 20px;
+            font-weight: 700;
+        }
+        .stat-card .stat-value.red { color: #ef4444; }
+        .stat-card .stat-value.amber { color: #f59e0b; }
+        .stat-card .stat-value.cyan { color: #22d3ee; }
+        .stat-card .stat-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            color: #4b5563;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            margin-top: 4px;
+        }
+        .stat-card .stat-delta {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            margin-top: 2px;
+            font-weight: 600;
+        }
+        .stat-delta.down { color: #ef4444; }
+        .stat-delta.up { color: #10b981; }
+
+        /* Charts */
+        .chart-container {
+            background: #0d1117;
+            border: 1px solid #1c2433;
+            border-radius: 3px;
+            padding: 16px;
+            margin-top: 16px;
+        }
+        .chart-title {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #6b7280;
+            margin-bottom: 12px;
+        }
+        .chart-caption {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: #4b5563;
+            margin-top: 10px;
+            line-height: 1.5;
+        }
+        .chart-container svg { width: 100%; height: auto; display: block; }
+
+        /* Executive Summary */
+        .exec-grid { display: grid; gap: 12px; }
+        .exec-item {
+            background: #0d1117;
+            border: 1px solid #1c2433;
+            border-radius: 3px;
+            padding: 14px 16px;
+            border-left: 3px solid;
+        }
+        .exec-item.data-tech { border-left-color: #3b82f6; }
+        .exec-item.finance { border-left-color: #10b981; }
+        .exec-item.health { border-left-color: #ef4444; }
+        .exec-item.learning { border-left-color: #a855f7; }
+        .exec-item.military { border-left-color: #6b7280; }
+        .exec-item.psychology { border-left-color: #14b8a6; }
+        .exec-item .exec-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
+            margin-bottom: 8px;
+        }
+        .exec-item.data-tech .exec-label { color: #3b82f6; }
+        .exec-item.finance .exec-label { color: #10b981; }
+        .exec-item.health .exec-label { color: #ef4444; }
+        .exec-item.learning .exec-label { color: #a855f7; }
+        .exec-item.military .exec-label { color: #6b7280; }
+        .exec-item.psychology .exec-label { color: #14b8a6; }
+        .exec-item p { font-size: 13px; color: #9ca3af; line-height: 1.65; }
+
+        /* Category Sections */
+        .cat-header {
+            padding: 14px 20px;
+            border-bottom: 1px solid #1c2433;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            background: #0f1419;
+        }
+        .cat-header h3 {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 12px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .cat-dot { width: 8px; height: 8px; border-radius: 2px; display: inline-block; }
+        .cat-dot.blue { background: #3b82f6; }
+        .cat-dot.green { background: #10b981; }
+        .cat-dot.red { background: #ef4444; }
+        .cat-dot.purple { background: #a855f7; }
+        .cat-dot.grey { background: #6b7280; }
+        .cat-dot.teal { background: #14b8a6; }
+
+        /* Post Items */
+        .post-item {
+            padding: 16px 20px;
+            border-bottom: 1px solid #1c2433;
+            transition: background 0.15s;
+        }
+        .post-item:last-child { border-bottom: none; }
+        .post-item:hover { background: #0d1117; }
+        .post-row {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+        }
+        .post-idx {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 700;
+            color: #374151;
+            min-width: 20px;
+            padding-top: 2px;
+        }
+        .post-content { flex: 1; }
+        .post-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #e5e7eb;
+            margin-bottom: 6px;
+            line-height: 1.4;
+        }
+        .post-title a { color: #e5e7eb; }
+        .post-title a:hover { color: #22d3ee; }
+        .badges { display: flex; gap: 6px; margin-bottom: 8px; flex-wrap: wrap; }
+        .badge {
+            font-family: 'JetBrains Mono', monospace;
+            display: inline-block;
+            padding: 2px 8px;
+            border-radius: 2px;
+            font-size: 9px;
+            font-weight: 600;
+            letter-spacing: 0.8px;
+            text-transform: uppercase;
+        }
+        .badge.multi { background: rgba(245,158,11,0.15); color: #f59e0b; border: 1px solid rgba(245,158,11,0.3); }
+        .badge.linkedin { background: rgba(59,130,246,0.15); color: #3b82f6; border: 1px solid rgba(59,130,246,0.3); }
+        .badge.gmail { background: rgba(239,68,68,0.15); color: #ef4444; border: 1px solid rgba(239,68,68,0.3); }
+        .post-desc {
+            font-size: 13px;
+            color: #6b7280;
+            line-height: 1.65;
+            padding-left: 32px;
+        }
+        .post-desc a { color: #22d3ee; font-weight: 500; }
+
+        /* Wind-Down */
+        .yt-card {
+            background: #0d1117;
+            border: 1px solid #1c2433;
+            border-radius: 3px;
+            overflow: hidden;
+            margin-bottom: 16px;
+        }
+        .yt-card:last-child { margin-bottom: 0; }
+        .yt-card img {
+            width: 100%;
+            display: block;
+            border-bottom: 1px solid #1c2433;
+        }
+        .yt-card .yt-info { padding: 16px; }
+        .yt-card h4 { font-size: 14px; font-weight: 600; color: #e5e7eb; margin-bottom: 6px; }
+        .yt-card h4 a { color: #e5e7eb; }
+        .yt-card h4 a:hover { color: #22d3ee; }
+        .yt-card p { font-size: 13px; color: #6b7280; line-height: 1.6; margin-bottom: 10px; }
+        .yt-btn {
+            display: inline-block;
+            padding: 6px 14px;
+            background: rgba(239,68,68,0.15);
+            color: #ef4444;
+            border: 1px solid rgba(239,68,68,0.3);
+            border-radius: 2px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            font-weight: 600;
+            letter-spacing: 0.5px;
+        }
+        .yt-btn:hover { background: rgba(239,68,68,0.25); text-decoration: none; }
+
+        /* Stoic */
+        .stoic-section {
+            background: #0d1117;
+            border-top: 1px solid #1c2433;
+            padding: 24px;
+        }
+        .stoic-label {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #f59e0b;
+            margin-bottom: 16px;
+        }
+        .stoic-section blockquote {
+            font-size: 16px;
+            font-style: italic;
+            color: #9ca3af;
+            line-height: 1.7;
+            margin-bottom: 10px;
+            border-left: 2px solid #f59e0b;
+            padding-left: 16px;
+        }
+        .stoic-section .attribution {
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 11px;
+            color: #4b5563;
+            margin-bottom: 14px;
+            padding-left: 18px;
+        }
+        .stoic-section .attribution a { color: #4b5563; }
+        .stoic-section .commentary {
+            font-size: 13px;
+            color: #4b5563;
+            line-height: 1.65;
+            border-top: 1px solid #1c2433;
+            padding-top: 14px;
+        }
+        .stoic-section .commentary a { color: #6b7280; }
+
+        /* Footer */
+        .footer {
+            padding: 16px 24px;
+            border-top: 1px solid #1c2433;
+            background: #0d1117;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 10px;
+            color: #374151;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .footer a { color: #4b5563; }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .stat-row { grid-template-columns: repeat(2, 1fr); }
+            .header-stats { gap: 12px; }
+            .post-desc { padding-left: 0; }
+            .post-row { flex-direction: column; gap: 4px; }
+            .post-idx { display: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Classification Bar -->
+        <div class="class-bar">
+            <div>Expert Network // Intelligence Briefing</div>
+            <div class="status">LIVE — 15 Mar 2026</div>
+        </div>
+
+        <!-- Header -->
+        <div class="header">
+            <h1>Daily <span>Briefing</span></h1>
+            <div class="subtitle">15 MARCH 2026 — THE IDES OF MARCH</div>
+            <div class="header-stats">
+                <div class="header-stat">ITEMS: <strong>28</strong></div>
+                <div class="header-stat">CATEGORIES: <strong>6</strong></div>
+                <div class="header-stat">SOURCES: <strong>LinkedIn + Gmail + Web</strong></div>
+                <div class="header-stat">MULTI-SOURCE: <strong>4</strong></div>
+            </div>
+        </div>
+
+        <!-- Critical News Brief -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Critical News Brief</h2>
+                <span class="indicator critical">PRIORITY</span>
+            </div>
+            <div class="section-body">
+                <div class="news-grid">
+                    <div class="news-card geo">
+                        <div class="news-tag">Geopolitical</div>
+                        <h4>US-Israel War on Iran — Day 16</h4>
+                        <p>US and Israel strikes entered their 16th day. Trump bombed Iranian military installations on <a href="https://en.wikipedia.org/wiki/Kharg_Island">Kharg Island</a>, which handles ~90% of Iran's oil exports. Over 1,400 killed since February 28. Tehran reports 10,000+ residential homes damaged. Iran launched retaliatory missile barrages into central Israel. Trump told <a href="https://www.nbcnews.com/meet-the-press">NBC's Meet the Press</a> that Iran is "defeated militarily" but "the terms aren't good enough yet." <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis">Full crisis timeline</a>.</p>
+                    </div>
+
+                    <div class="news-card energy">
+                        <div class="news-tag">Energy</div>
+                        <h4>Strait of Hormuz Crisis & Oil Surge</h4>
+                        <p>Iran's new supreme leader, Mojtaba Khamenei, declared the Strait of Hormuz should remain closed as a "tool to pressure the enemy." Commercial shipping has nearly halted. <a href="https://fortune.com/article/price-of-oil-03-13-2026/">WTI crude surged to $98.71/barrel</a> (up ~13% in a week). The <a href="https://www.iea.org/reports/oil-market-report-march-2026">IEA announced the largest-ever emergency oil stock release</a> (400M barrels from 32 member states), though <a href="https://www.fool.com/investing/2026/03/15/prediction-oil-prices-stay-elevated-in-2026-and/">analysts say it may only provide one month of relief</a>. Live: <a href="https://hormuzstraitmonitor.com/">Hormuz Strait Monitor</a>.</p>
+                        <!-- WTI Oil Price Chart -->
+                        <div class="chart-container">
+                            <div class="chart-title">WTI Crude Oil — Feb to Mar 2026</div>
+                            <svg viewBox="0 0 600 200" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="oilGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#ef4444" stop-opacity="0.25"/>
+                                        <stop offset="100%" stop-color="#ef4444" stop-opacity="0.02"/>
+                                    </linearGradient>
+                                </defs>
+                                <line x1="50" y1="20" x2="580" y2="20" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="60" x2="580" y2="60" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="100" x2="580" y2="100" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="140" x2="580" y2="140" stroke="#1c2433" stroke-width="0.5"/>
+                                <text x="45" y="24" font-size="10" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$100</text>
+                                <text x="45" y="64" font-size="10" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$90</text>
+                                <text x="45" y="104" font-size="10" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$80</text>
+                                <text x="45" y="144" font-size="10" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$70</text>
+                                <text x="45" y="184" font-size="10" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$60</text>
+                                <text x="75" y="195" font-size="9" fill="#374151" text-anchor="middle" font-family="JetBrains Mono, monospace">Feb 1</text>
+                                <text x="190" y="195" font-size="9" fill="#374151" text-anchor="middle" font-family="JetBrains Mono, monospace">Feb 15</text>
+                                <text x="310" y="195" font-size="9" fill="#ef4444" text-anchor="middle" font-weight="700" font-family="JetBrains Mono, monospace">Feb 28</text>
+                                <text x="430" y="195" font-size="9" fill="#374151" text-anchor="middle" font-family="JetBrains Mono, monospace">Mar 8</text>
+                                <text x="555" y="195" font-size="9" fill="#374151" text-anchor="middle" font-family="JetBrains Mono, monospace">Mar 14</text>
+                                <line x1="310" y1="20" x2="310" y2="180" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2"/>
+                                <text x="310" y="14" font-size="8" fill="#ef4444" text-anchor="middle" font-weight="600" font-family="JetBrains Mono, monospace">STRIKES BEGIN</text>
+                                <polygon points="75,140 120,138 165,136 210,134 255,132 310,130 340,90 370,70 400,55 430,42 460,38 490,30 520,26 555,18 555,180 75,180" fill="url(#oilGrad)"/>
+                                <polyline points="75,140 120,138 165,136 210,134 255,132 310,130" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+                                <polyline points="310,130 340,90 370,70 400,55 430,42 460,38 490,30 520,26 555,18" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                <circle cx="555" cy="18" r="4" fill="#ef4444"/>
+                                <text x="556" y="14" font-size="11" fill="#ef4444" font-weight="700" font-family="JetBrains Mono, monospace">$98.71</text>
+                                <circle cx="75" cy="140" r="3" fill="#4b5563"/>
+                                <text x="76" y="154" font-size="10" fill="#4b5563" font-family="JetBrains Mono, monospace">$68.20</text>
+                            </svg>
+                            <div class="chart-caption">Source: <a href="https://fortune.com/article/price-of-oil-03-13-2026/">Fortune</a> · <a href="https://fred.stlouisfed.org/series/DCOILWTICO">FRED</a> · <a href="https://oilprice.com/">OilPrice.com</a> // WTI surged 44.7% since strikes began</div>
+                        </div>
+                    </div>
+
+                    <div class="news-card fin">
+                        <div class="news-tag">Financial</div>
+                        <h4>Markets Rattled — S&P 500 and Dow in Decline</h4>
+                        <p><a href="https://www.cnbc.com/2026/03/12/stock-market-today-live-updates.html">S&P 500 closed at 6,632</a> (down ~2.1% on the week). Dow shed 739 points in Thursday's session alone. <a href="https://www.fool.com/investing/2026/03/12/stock-market-alarm-oil-prices-surge-sp-500/">CBOE VIX spiked above 29</a>, well above the fear threshold of 20. <a href="https://247wallst.com/investing/2026/03/12/stock-market-live-march-12-2026-sp-500-spy-slips-on-oil-again/">24/7 Wall St. coverage</a>.</p>
+                    </div>
+                </div>
+
+                <!-- Market Stat Cards -->
+                <div class="stat-row">
+                    <div class="stat-card">
+                        <div class="stat-value red">6,632</div>
+                        <div class="stat-label">S&P 500</div>
+                        <div class="stat-delta down">&#9660; 2.1% wk</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value red">46,558</div>
+                        <div class="stat-label">Dow Jones</div>
+                        <div class="stat-delta down">&#9660; 739 pts</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value amber">29+</div>
+                        <div class="stat-label">CBOE VIX</div>
+                        <div class="stat-delta down">&#9650; Fear zone</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value red">$98.71</div>
+                        <div class="stat-label">WTI Crude</div>
+                        <div class="stat-delta down">&#9650; 13% / 7d</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Executive Summary -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Executive Summary</h2>
+                <span class="indicator active">6 Categories</span>
+            </div>
+            <div class="section-body">
+                <div class="exec-grid">
+                    <div class="exec-item data-tech">
+                        <div class="exec-label">Data, Tech & AI</div>
+                        <p><strong style="color:#e5e7eb">Dominant week shaped by divergent visions of AI's future.</strong> Yann LeCun's <a href="https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/">$1B AMI Labs raise</a> directly challenged the LLM monoculture, while Mustafa Suleyman outlined <a href="https://www.windowscentral.com/artificial-intelligence/microsoft-ai-chief-warns-military-grade-intervention">conditions for military-grade AI intervention</a>. The <a href="https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/">Meta acquisition of Moltbook</a> and Ethan Mollick's warnings about AI bots signal growing concern about authentic discourse. The AMI Labs story, Moltbook acquisition, and <a href="https://a16z.com/100-gen-ai-apps-6/">a16z's Top 100 Gen AI list</a> all appeared across multiple sources.</p>
+                    </div>
+                    <div class="exec-item finance">
+                        <div class="exec-label">Finance & Investment</div>
+                        <p><strong style="color:#e5e7eb">Ray Dalio and Nassim Taleb cited in discussions about AI-accelerated debt cycles.</strong> Taleb's antifragility framework is being actively applied to crisis investing. a16z released its <a href="https://a16z.com/100-gen-ai-apps-6/">6th edition Top 100 Gen AI</a>, and <a href="https://techcrunch.com/2026/03/11/rivian-mind-robotics-series-a-500m-fund-raise-industrial-ai-powered-robots/">Mind Robotics raised $500M</a> with a16z participation.</p>
+                    </div>
+                    <div class="exec-item health">
+                        <div class="exec-label">Health & Performance</div>
+                        <p><strong style="color:#e5e7eb">Peter Attia's <a href="https://www.cnbc.com/2026/02/23/epstein-files-peter-attia-cbs-news.html">Epstein controversy</a> cascaded into CBS departure and <a href="https://www.thedailybeast.com/ousted-cbs-star-peter-attia-hit-with-fresh-fallout-after-epstein-shame/">Oura litigation</a>.</strong> The <a href="https://fortune.com/2026/03/15/australian-tech-entrepreneur-ai-cancer-vaccine-dog-rosie-unsw-mrna/">AlphaFold cancer vaccine story</a> has significant longevity implications.</p>
+                    </div>
+                    <div class="exec-item learning">
+                        <div class="exec-label">Learning & Collective Intelligence</div>
+                        <p><strong style="color:#e5e7eb">No direct posts from listed experts.</strong> McKinsey published on collaborative problem-solving. <a href="https://www.ideou.com">IDEO U</a> promoted Human + AI leadership courses. Cal Newport's frameworks continued circulating.</p>
+                    </div>
+                    <div class="exec-item military">
+                        <div class="exec-label">Military & OSINT</div>
+                        <p><strong style="color:#e5e7eb">OSINT Google Alerts were highly active.</strong> <a href="https://united24media.com/latest-news/russias-nuclear-arsenal-is-hiding-secrets-heres-what-newly-hacked-data-shows-16867">Ukrainian teams hacked Russian nuclear data</a>, <a href="https://www.pravda.com.ua/eng/news/2026/03/11/8024931/">Storm Shadow analysis</a> published, OSINT tracked <a href="https://sundayguardianlive.com/india/iran-us-israel-war-latest-news-did-the-indian-navy-escort-two-lpg-tankers-shivalik-nanda-devi-across-the-strait-of-hormuz-satellite-images-show-warships-near-india-bound-fuel-ships-176530/">Hormuz naval movements</a>.</p>
+                    </div>
+                    <div class="exec-item psychology">
+                        <div class="exec-label">Psychology & Philosophy</div>
+                        <p><strong style="color:#e5e7eb">Azeem Azhar published on the <a href="https://www.exponentialview.co/p/solar-supercycle">Solar Supercycle</a> and <a href="https://www.exponentialview.co/p/data-to-start-your-week-26-03-09">AI chip concentration</a>.</strong> <a href="https://pluralistic.net/2026/03/12/normal-technology/">Cory Doctorow's Pluralist</a> covered AI psychoses. Ryan Holiday's Stoic content continued generating engagement.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Data, Tech & AI -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot blue"></span> Data, Tech & AI</h3>
+                <span class="indicator count">11 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title"><a href="https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/">Yann LeCun — AMI Labs Raises $1B for World Models</a></div>
+                        <div class="badges"><span class="badge multi">Multi-Source</span></div>
+                    </div></div>
+                    <div class="post-desc">New startup <a href="https://thenextweb.com/news/yann-lecun-ami-labs-world-models-billion">valued at $3.5B</a>, backed by Bezos and NVIDIA. Criticised the AI industry's LLM monoculture; pursuing <a href="https://www.technologyreview.com/2026/01/22/1131661/yann-lecuns-new-venture-ami-labs/">world models for robotics</a>. Covered on LinkedIn, <a href="https://www.superhuman.ai">Superhuman</a>, and Geoffrey Hinton Google Alert.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title"><a href="https://techcrunch.com/2026/03/10/meta-acquired-moltbook-the-ai-agent-social-network-that-went-viral-because-of-fake-posts/">Meta / Moltbook — AI Agent Social Network Acquired</a></div>
+                        <div class="badges"><span class="badge multi">Multi-Source</span></div>
+                    </div></div>
+                    <div class="post-desc">Meta acquired Moltbook, the <a href="https://www.axios.com/2026/03/10/meta-facebook-moltbook-agent-social-network">Reddit-like platform where AI agents interact autonomously</a>. Ethan Mollick warned about AI bots destroying authentic engagement. Covered in <a href="https://tldr.tech">TLDR</a>, <a href="https://www.superhuman.ai">Superhuman</a>, and <a href="https://www.cnbc.com/2026/03/10/meta-social-networks-ai-agents-moltbook-acquisition.html">CNBC</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">03</div><div class="post-content">
+                        <div class="post-title"><a href="https://a16z.com/100-gen-ai-apps-6/">Azeem Azhar / a16z — Top 100 Gen AI Web Products (6th Edition)</a></div>
+                        <div class="badges"><span class="badge multi">Multi-Source</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://www.a16z.news/p/top-100-gen-ai-consumer-apps-march">ChatGPT at 900M weekly users</a>; Claude growing paid subscribers 200% YoY. <a href="https://medium.com/@ruler547/the-death-of-the-thin-wrapper-what-a16zs-top-100-ai-apps-reveal-about-the-next-tech-monopoly-a66678c51615">Legacy tools like Canva, Grammarly, and Notion</a> now AI-powered to their core.
+                        <div class="chart-container" style="margin-top:14px">
+                            <div class="chart-title">Top Gen AI Apps — Weekly Active Users (Jan 2026)</div>
+                            <svg viewBox="0 0 560 180" xmlns="http://www.w3.org/2000/svg">
+                                <rect x="100" y="12" width="420" height="22" rx="2" fill="#3b82f6" opacity="0.7"/>
+                                <text x="95" y="27" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">ChatGPT</text>
+                                <text x="515" y="27" font-size="10" fill="#e5e7eb" text-anchor="end" font-weight="700" font-family="JetBrains Mono, monospace">900M</text>
+                                <rect x="100" y="40" width="155" height="22" rx="2" fill="#10b981" opacity="0.7"/>
+                                <text x="95" y="55" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">Gemini</text>
+                                <text x="250" y="55" font-size="10" fill="#e5e7eb" text-anchor="end" font-weight="700" font-family="JetBrains Mono, monospace">333M</text>
+                                <rect x="100" y="68" width="65" height="22" rx="2" fill="#a855f7" opacity="0.7"/>
+                                <text x="95" y="83" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">Claude</text>
+                                <text x="170" y="83" font-size="10" fill="#e5e7eb" text-anchor="end" font-weight="700" font-family="JetBrains Mono, monospace">112M</text>
+                                <rect x="100" y="96" width="56" height="22" rx="2" fill="#14b8a6" opacity="0.7"/>
+                                <text x="95" y="111" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">Perplexity</text>
+                                <text x="161" y="111" font-size="10" fill="#e5e7eb" text-anchor="end" font-weight="700" font-family="JetBrains Mono, monospace">96M</text>
+                                <rect x="100" y="124" width="42" height="22" rx="2" fill="#f59e0b" opacity="0.7"/>
+                                <text x="95" y="139" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">DeepSeek</text>
+                                <text x="147" y="139" font-size="10" fill="#9ca3af" text-anchor="start" font-weight="600" font-family="JetBrains Mono, monospace">72M</text>
+                                <rect x="100" y="152" width="33" height="22" rx="2" fill="#ef4444" opacity="0.7"/>
+                                <text x="95" y="167" font-size="10" fill="#6b7280" text-anchor="end" font-weight="600" font-family="JetBrains Mono, monospace">Cursor</text>
+                                <text x="138" y="167" font-size="10" fill="#9ca3af" text-anchor="start" font-weight="600" font-family="JetBrains Mono, monospace">56M</text>
+                            </svg>
+                            <div class="chart-caption">Source: <a href="https://a16z.com/100-gen-ai-apps-6/">a16z 6th Edition</a> · SimilarWeb · Sensor Tower</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">04</div><div class="post-content">
+                        <div class="post-title"><a href="https://nationaltoday.com/us/ny/new-york/news/2026/03/12/wharton-professor-ethan-mollick-sees-ai-shifting-from-chatbot-to-coworker/">Ethan Mollick — AI Bots Overrunning Public Forums</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Warned AI-generated comments flooding LinkedIn, creating "attention vampires." Related: <a href="https://seekingalpha.com/news/4563600-researcher-ethan-mollick-says-ai-is-moving-from-chatbot-to-co-worker-with-disruption-close">Mollick on AI shifting from chatbot to coworker</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">05</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.insight.com/en_US/content-and-resources/insight-on/inside-the-new-reality-of-ai-at-work-with-ethan-mollick.html">Ethan Mollick — Enterprise AI Adoption on Insight On Podcast</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Research-backed framework for enterprise AI adoption. <a href="https://knowledge.wharton.upenn.edu/podcast/this-week-in-business/where-artificial-intelligence-stands-heading-into-2026/">Wharton podcast on AI in 2026</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">06</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.deeplearning.ai/short-courses/build-and-train-an-llm-with-jax/">Andrew Ng — New Course: Build and Train an LLM with JAX</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://www.deeplearning.ai/short-courses/build-and-train-an-llm-with-jax/">DeepLearning.AI course</a> with Google: build a 20M parameter model from scratch using JAX. <a href="https://www.linkedin.com/posts/andrewyng_new-course-build-and-train-an-llm-with-jax-activity-7435031821161050112-h4RK">Andrew Ng's post</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">07</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.windowscentral.com/artificial-intelligence/microsoft-ai-chief-warns-military-grade-intervention">Mustafa Suleyman — Four Conditions for Shutting Down AI</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Four converging criteria requiring "military-grade intervention": goal autonomy, autonomous action, resource acquisition, recursive self-improvement. <a href="https://www.foreignaffairs.com/world/containment-artificial-intelligence-mustafa-suleyman">Foreign Affairs analysis</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">08</div><div class="post-content">
+                        <div class="post-title"><a href="https://fortune.com/2026/03/15/australian-tech-entrepreneur-ai-cancer-vaccine-dog-rosie-unsw-mrna/">Demis Hassabis — AlphaFold Used for Custom mRNA Cancer Vaccine</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Tech entrepreneur used ChatGPT + AlphaFold to <a href="https://the-decoder.com/ai-consultant-uses-chatgpt-alphafold-and-grok-to-find-a-possible-treatment-for-his-dogs-cancer/">design custom mRNA vaccine for his dog's cancer</a> — <a href="https://www.ibtimes.co.uk/sydney-data-engineer-mrna-cancer-vaccine-dog-1785607">tumours shrunk 75%</a>. Hassabis shared as proof of digital biology's potential.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">09</div><div class="post-content">
+                        <div class="post-title"><a href="https://rossdawson.com/humans-plus-ai/workflow-principles/">Ross Dawson — Principles for Humans + AI Teaming</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Framework for enterprise human-AI teams. See also: <a href="https://rossdawson.com/framework-agentic-ai-core-patterns-for-organization-design/">Agentic AI core patterns for org design</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">10</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.prnewswire.com/news-releases/alpha-school-recognized-by-nobel-laureate-and-godfather-of-ai-geoffrey-hinton-as-a-beacon-of-optimism-in-the-ai-era-302670247.html">Geoffrey Hinton — AI in Education and "Is AI Hiding Its Full Power?"</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Hinton praised <a href="https://alpha.school/">Alpha School</a>'s AI tutoring (<a href="https://www.cnn.com/2026/01/29/politics/alpha-school-trump-ai-teaching">CNN</a>), featured in <a href="https://startalkmedia.com/show/the-origins-of-artificial-intelligence-with-geoffrey-hinton/">StarTalk</a> on AI origins, and <a href="https://betakit.com">BetaKit</a> on Canada's AI competitiveness.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">11</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.bloomberg.com/news/articles/2026-02-18/ai-pioneer-fei-fei-li-s-startup-world-labs-raises-1-billion">Fei-Fei Li — Forbes "Women Shaping VC and AI"</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Forbes featured Li as co-founder of <a href="https://techcrunch.com/2026/02/18/world-labs-lands-200m-from-autodesk-to-bring-world-models-into-3d-workflows/">World Labs ($1B raised)</a>. See also: <a href="https://news.lee.net/fei-fei-li-sparked-an-ai-boom-now-she-wont-let-humans-fall-behind/article_c48db302-6238-562c-80bf-e4804cbf2ff8.html">Lee Enterprises profile</a>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Finance & Investment -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot green"></span> Finance & Investment</h3>
+                <span class="indicator count">4 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title"><a href="https://a16z.com/100-gen-ai-apps-6/">Andreessen Horowitz — a16z Top 100 Gen AI</a> + <a href="https://techcrunch.com/2026/03/11/rivian-mind-robotics-series-a-500m-fund-raise-industrial-ai-powered-robots/">Mind Robotics $500M</a></div>
+                        <div class="badges"><span class="badge multi">Multi-Source</span></div>
+                    </div></div>
+                    <div class="post-desc">a16z released <a href="https://a16z.com/100-gen-ai-apps-6/">6th edition Top 100</a> (via <a href="https://www.superhuman.ai">Superhuman</a>). Co-led <a href="https://techcrunch.com/2026/03/11/rivian-mind-robotics-series-a-500m-fund-raise-industrial-ai-powered-robots/">$500M raise for Mind Robotics</a>, valuing it at <a href="https://seekingalpha.com/news/4563285-rivian-ai-robotics-spinoff-mind-robotics-is-valued-at-2b-in-new-funding-round">$2B</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title">Ray Dalio & Nassim Taleb — Economic Collapse Risk from AI-Accelerated Debt</div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Both cited in discussions about global debt outpacing real economy. Related: <a href="https://www.jpmorgan.com/insights/global-research/commodities/oil-prices">J.P. Morgan oil price forecast</a> amid Hormuz crisis.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">03</div><div class="post-content">
+                        <div class="post-title">Nassim Nicholas Taleb — Antifragility as Crisis Investment Framework</div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">Framework used to distinguish fragile vs antifragile companies. Key signals: debt levels, organisational structure, shared risk/reward.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">04</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.cnn.com/2026/03/09/tech/anthropic-sues-pentagon">Dario Amodei / Anthropic — Pentagon Standoff and AI Consciousness</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://techcrunch.com/2026/03/09/anthropic-sues-defense-department-over-supply-chain-risk-designation/">Anthropic sued Pentagon</a> over "supply chain risk" label (<a href="https://www.npr.org/2026/03/09/nx-s1-5742548/anthropic-pentagon-lawsuit-amodai-hegseth">NPR</a>, <a href="https://www.axios.com/2026/03/09/anthropic-sues-pentagon-supply-chain-risk-label">Axios</a>). Amodei raised <a href="https://www.newsweek.com/anthropic-ceo-raises-unsettling-possibility-about-ai-11644833">20% probability AI models may be conscious</a>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Health & Performance -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot red"></span> Health & Performance</h3>
+                <span class="indicator count">3 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.cnbc.com/2026/02/23/epstein-files-peter-attia-cbs-news.html">Peter Attia — Epstein Controversy Fallout</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://www.hollywoodreporter.com/business/business-news/peter-attia-cbs-news-contributor-epstein-files-1236512662/">CBS departure (Hollywood Reporter)</a>, <a href="https://www.thedailybeast.com/ousted-cbs-star-peter-attia-hit-with-fresh-fallout-after-epstein-shame/">Oura litigation (Daily Beast)</a>. <a href="https://www.washingtonpost.com/business/2026/02/23/peter-attia-exits-cbs-epstein/">Washington Post coverage</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title">Hololife Center — Longevity Live-Stream Invitations</div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Multiple emails promoting longevity live-stream events, positioning as signal-vs-noise filter in longevity space.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">03</div><div class="post-content">
+                        <div class="post-title">Thriva / Stanford — Personalised Nutrition Research</div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Dr Lucia Aronica from Stanford on nutrition myth-busting. Via <a href="https://thriva.co">Thriva newsletter</a>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Learning & Collective Intelligence -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot purple"></span> Learning & Collective Intelligence</h3>
+                <span class="indicator count">2 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title">McKinsey — Collaborative Problem Solving and Dissent</div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Guide on welcoming dissent and collaborative problem-solving approaches.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.ideou.com">IDEO U</a> — Human + AI Leadership Courses</div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">7-course leadership bundle for leading in a "Human + AI world." <a href="https://www.ideou.com">View catalogue</a>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Military & OSINT -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot grey"></span> Military & OSINT</h3>
+                <span class="indicator count">4 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title"><a href="https://united24media.com/latest-news/russias-nuclear-arsenal-is-hiding-secrets-heres-what-newly-hacked-data-shows-16867">OSINT — Ukrainian Teams Hack Russian Nuclear Arsenal Data</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Files obtained on software for testing Russia's strategic nuclear forces, linked to Polyus-24. <a href="https://ukrainetoday.org/informnapalm-ukrainian-hackers-obtained-data-on-russias-nuclear-forces-development-and-testing-systems/">InformNapalm report</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.pravda.com.ua/eng/news/2026/03/11/8024931/">OSINT — Storm Shadow Strike Analysis: Seven Hits on Bryansk Plant</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">CyberBoroshno analysts reconstructed <a href="https://empr.media/news/war/seven-strikes-osint-analysts-reveal-details-of-storm-shadow-attack-on-russian-factory/">route and impact pattern</a> on <a href="https://united24media.com/latest-news/ukraine-blasts-russian-war-electronics-factory-satellite-images-reveal-devastation-16739">Kremniy EL plant</a>. <a href="https://english.nv.ua/russian-war/storm-shadow-strike-hits-bryansk-chip-plant-50590635.html">Facility likely decommissioned</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">03</div><div class="post-content">
+                        <div class="post-title"><a href="https://sundayguardianlive.com/india/iran-us-israel-war-latest-news-did-the-indian-navy-escort-two-lpg-tankers-shivalik-nanda-devi-across-the-strait-of-hormuz-satellite-images-show-warships-near-india-bound-fuel-ships-176530/">OSINT — Hormuz Strait Naval Tracking</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Damien Symon used satellite imagery to track <a href="https://www.businesstoday.in/india/story/indian-navy-warships-escort-indian-lpg-tankers-through-gulf-of-oman-amid-regional-conflict-520625-2026-03-14">Indian Navy escorting LPG tankers</a> (~92,700t LPG). Context: <a href="https://en.wikipedia.org/wiki/2026_Strait_of_Hormuz_crisis">2026 Hormuz crisis</a>. Live: <a href="https://hormuzstraitmonitor.com/">Hormuz Monitor</a>.
+                        <div class="chart-container" style="margin-top:14px">
+                            <div class="chart-title">Strait of Hormuz — Shipping Transit Collapse</div>
+                            <svg viewBox="0 0 560 160" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="transitGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#6b7280" stop-opacity="0.15"/>
+                                        <stop offset="100%" stop-color="#6b7280" stop-opacity="0.02"/>
+                                    </linearGradient>
+                                </defs>
+                                <text x="45" y="24" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">100%</text>
+                                <text x="45" y="64" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">75%</text>
+                                <text x="45" y="104" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">50%</text>
+                                <text x="45" y="144" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">25%</text>
+                                <line x1="50" y1="20" x2="540" y2="20" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="60" x2="540" y2="60" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="100" x2="540" y2="100" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="140" x2="540" y2="140" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="260" y1="15" x2="260" y2="150" stroke="#ef4444" stroke-width="1" stroke-dasharray="4,2"/>
+                                <text x="260" y="12" font-size="8" fill="#ef4444" text-anchor="middle" font-weight="600" font-family="JetBrains Mono, monospace">FEB 28 — STRIKES</text>
+                                <polyline points="70,22 120,24 170,22 220,25 260,24" fill="none" stroke="#4b5563" stroke-width="1.5"/>
+                                <polyline points="260,24 290,60 320,90 350,110 380,120 410,128 440,130 470,132 500,134 530,135" fill="none" stroke="#ef4444" stroke-width="2"/>
+                                <polygon points="70,22 120,24 170,22 220,25 260,24 290,60 320,90 350,110 380,120 410,128 440,130 470,132 500,134 530,135 530,150 70,150" fill="url(#transitGrad)"/>
+                                <text x="165" y="42" font-size="10" fill="#4b5563" font-weight="600" font-family="JetBrains Mono, monospace">Normal traffic</text>
+                                <circle cx="530" cy="135" r="4" fill="#ef4444"/>
+                                <text x="525" y="149" font-size="10" fill="#ef4444" font-weight="700" font-family="JetBrains Mono, monospace">~5%</text>
+                                <text x="70" y="158" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">Feb 1</text>
+                                <text x="260" y="158" font-size="9" fill="#ef4444" font-weight="600" font-family="JetBrains Mono, monospace">Feb 28</text>
+                                <text x="400" y="158" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">Mar 8</text>
+                                <text x="510" y="158" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">Mar 14</text>
+                            </svg>
+                            <div class="chart-caption">Source: <a href="https://hormuzstraitmonitor.com/">Hormuz Monitor</a> · <a href="https://windward.ai/blog/march-10-maritime-intelligence-daily/">Windward</a> · <a href="https://www.lloydslist.com/LL1156485">Lloyd's List</a> // VLCC day rates hit all-time high $423,736</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">04</div><div class="post-content">
+                        <div class="post-title"><a href="https://thebaffler.com/latest/situational-unawareness-mcbrien">OSINT — "Situational Unawareness" by Tyler McBrien</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://thebaffler.com/latest/situational-unawareness-mcbrien">The Baffler piece</a> arguing OSINT democratised powerful intelligence but raised questions about context and information overload.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Category: Psychology & Philosophy -->
+        <div class="section">
+            <div class="cat-header">
+                <h3><span class="cat-dot teal"></span> Psychology & Philosophy</h3>
+                <span class="indicator count">4 ITEMS</span>
+            </div>
+            <div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">01</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.exponentialview.co/p/solar-supercycle">Azeem Azhar — The Solar Supercycle</a></div>
+                        <div class="badges"><span class="badge multi">Multi-Source</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://www.exponentialview.co/p/solar-supercycle">Exponential View</a>: every doubling of solar production cuts costs by 23.7%. Built <a href="https://solar.exponentialview.co/">interactive Wright's Law model</a>.
+                        <div class="chart-container" style="margin-top:14px">
+                            <div class="chart-title">Solar Module Cost — Wright's Law (23.7% decline/doubling)</div>
+                            <svg viewBox="0 0 560 150" xmlns="http://www.w3.org/2000/svg">
+                                <defs>
+                                    <linearGradient id="solarGrad" x1="0" y1="0" x2="0" y2="1">
+                                        <stop offset="0%" stop-color="#f59e0b" stop-opacity="0.15"/>
+                                        <stop offset="100%" stop-color="#f59e0b" stop-opacity="0.02"/>
+                                    </linearGradient>
+                                </defs>
+                                <line x1="50" y1="20" x2="540" y2="20" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="55" x2="540" y2="55" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="90" x2="540" y2="90" stroke="#1c2433" stroke-width="0.5"/>
+                                <line x1="50" y1="125" x2="540" y2="125" stroke="#1c2433" stroke-width="0.5"/>
+                                <text x="45" y="24" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$76/W</text>
+                                <text x="45" y="59" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$10/W</text>
+                                <text x="45" y="94" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$1/W</text>
+                                <text x="45" y="129" font-size="9" fill="#374151" text-anchor="end" font-family="JetBrains Mono, monospace">$0.20</text>
+                                <text x="70" y="143" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">1976</text>
+                                <text x="190" y="143" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">1990</text>
+                                <text x="310" y="143" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">2005</text>
+                                <text x="420" y="143" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">2015</text>
+                                <text x="510" y="143" font-size="9" fill="#374151" font-family="JetBrains Mono, monospace">2025</text>
+                                <polygon points="70,20 120,28 170,38 220,50 270,62 320,76 370,90 420,103 470,114 530,125 530,135 70,135" fill="url(#solarGrad)"/>
+                                <polyline points="70,20 120,28 170,38 220,50 270,62 320,76 370,90 420,103 470,114 530,125" fill="none" stroke="#f59e0b" stroke-width="2"/>
+                                <circle cx="70" cy="20" r="3" fill="#f59e0b"/>
+                                <circle cx="530" cy="125" r="4" fill="#f59e0b"/>
+                                <text x="82" y="16" font-size="9" fill="#f59e0b" font-weight="600" font-family="JetBrains Mono, monospace">$76/W</text>
+                                <text x="518" y="121" font-size="9" fill="#f59e0b" font-weight="700" text-anchor="end" font-family="JetBrains Mono, monospace">$0.20/W</text>
+                            </svg>
+                            <div class="chart-caption">Source: <a href="https://www.exponentialview.co/p/solar-supercycle">Exponential View</a> · <a href="https://solar.exponentialview.co/">Interactive model</a> // 99.7% cost decline over 50 years</div>
+                        </div>
+                    </div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">02</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.exponentialview.co/p/data-to-start-your-week-26-03-09">Azeem Azhar — AI Chip Concentration Near Monopoly</a></div>
+                        <div class="badges"><span class="badge linkedin">LinkedIn</span></div>
+                    </div></div>
+                    <div class="post-desc">AI chip market HHI at 0.59 (near monopoly). <a href="https://www.exponentialview.co/p/data-to-start-your-week-26-03-09">AI chips generate half of all chip revenue</a> despite 0.2% of volume. Hormuz closure threatens AWS data centres.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">03</div><div class="post-content">
+                        <div class="post-title"><a href="https://pluralistic.net/2026/03/12/normal-technology/">Cory Doctorow — "Three more AI psychoses"</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc"><a href="https://pluralistic.net/2026/03/12/normal-technology/">Pluralist</a>: AI has lost $600-700B; core assets depreciate in 2-3 years while companies claim 5. Also on <a href="https://doctorow.medium.com/https-pluralistic-net-2026-03-12-normal-technology-bubble-exceptionalism-8861f773a554">Medium</a>.</div>
+                </div>
+                <div class="post-item">
+                    <div class="post-row"><div class="post-idx">04</div><div class="post-content">
+                        <div class="post-title"><a href="https://www.manilatimes.net/2026/03/08/business/sunday-business-it/tech-leaders-urge-ai-safeguards-at-mobile-world-congress/2295240">Azeem Azhar — AI Safeguards at MWC</a></div>
+                        <div class="badges"><span class="badge gmail">Gmail</span></div>
+                    </div></div>
+                    <div class="post-desc">Azhar <a href="https://www.manilatimes.net/2026/03/08/business/sunday-business-it/tech-leaders-urge-ai-safeguards-at-mobile-world-congress/2295240">advocated for AI safeguards</a> at Mobile World Congress. <a href="https://broadbandbreakfast.com/at-mobile-world-congress-attendees-flag-ai-tech-sovereignty-and-geopolitics/">Broadband Breakfast coverage</a>.</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Wind-Down -->
+        <div class="section">
+            <div class="section-header">
+                <h2>Wind-Down // Your Daily Dose</h2>
+                <span class="indicator active">LISTEN + LAUGH</span>
+            </div>
+            <div class="section-body">
+                <div class="yt-card">
+                    <a href="https://youtu.be/RvRhUHTV_8k?si=Tt9tohWnFzVgy0k_">
+                        <img src="https://img.youtube.com/vi/RvRhUHTV_8k/maxresdefault.jpg" alt="Ben Böhmer live above Cappadocia for Cercle"/>
+                    </a>
+                    <div class="yt-info">
+                        <h4><a href="https://youtu.be/RvRhUHTV_8k?si=Tt9tohWnFzVgy0k_">Ben Böhmer — Live above Cappadocia, Turkey (Cercle)</a></h4>
+                        <p>Sunrise live set from a hot air balloon 3,000 feet above Cappadocia's fairy chimneys. Ethereal melodic house from one of <a href="https://www.cercle.io">Cercle</a>'s most iconic broadcasts.</p>
+                        <a href="https://youtu.be/RvRhUHTV_8k?si=Tt9tohWnFzVgy0k_" class="yt-btn">&#9654; WATCH ON YOUTUBE</a>
+                    </div>
+                </div>
+                <div class="yt-card">
+                    <a href="https://www.youtube.com/c/RobinWilliams">
+                        <img src="https://img.youtube.com/vi/VXnHUwiWqcI/maxresdefault.jpg" alt="Robin Williams Live on Broadway"/>
+                    </a>
+                    <div class="yt-info">
+                        <h4><a href="https://www.youtube.com/c/RobinWilliams">Robin Williams — Live on Broadway (Official Channel)</a></h4>
+                        <p>Classic clips from the legendary HBO specials, curated by his estate. The 2002 "Live on Broadway" covers everything from golf's genesis to biblical history at breakneck speed.</p>
+                        <a href="https://www.youtube.com/c/RobinWilliams" class="yt-btn">&#9654; WATCH ON YOUTUBE</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Daily Stoic (moved to bottom) -->
+        <div class="stoic-section">
+            <div class="stoic-label">Daily Stoic — 15 March // The Ides of March</div>
+            <blockquote>"Even if you're going to live three thousand more years, or ten times that, remember: you cannot lose another life than the one you're living now, or live another one than the one you're losing. The longest amounts to the same as the shortest."</blockquote>
+            <div class="attribution">— Marcus Aurelius, <a href="https://standardebooks.org/ebooks/marcus-aurelius/meditations/george-long"><em>Meditations</em></a>, 2.14</div>
+            <div class="commentary">Today is the Ides of March — the day <a href="https://en.wikipedia.org/wiki/Assassination_of_Julius_Caesar">Julius Caesar was assassinated</a> in 44 BC, a reminder that no position, no power, and no plan is guaranteed beyond this moment. Marcus Aurelius, who inherited an empire shaped by that very event, wrote constantly about the brevity of life. The Stoic lesson: treat today's decisions as if they are the only ones that matter — because they are.</div>
+        </div>
+
+        <!-- Footer -->
+        <div class="footer">
+            <p>GENERATED 15 MAR 2026 // EXPERT NETWORK BRIEFING FOR ALI // LINKEDIN + GMAIL + WEB INTELLIGENCE</p>
+            <p style="margin-top:8px"><a href="https://techcrunch.com/2026/03/09/yann-lecuns-ami-labs-raises-1-03-billion-to-build-world-models/">TechCrunch</a> · <a href="https://www.cnbc.com/2026/03/12/stock-market-today-live-updates.html">CNBC</a> · <a href="https://fortune.com/article/price-of-oil-03-13-2026/">Fortune</a> · <a href="https://www.iea.org/reports/oil-market-report-march-2026">IEA</a> · <a href="https://pluralistic.net/2026/03/12/normal-technology/">Pluralistic</a> · <a href="https://www.exponentialview.co/p/solar-supercycle">Exponential View</a> · <a href="https://a16z.com/100-gen-ai-apps-6/">a16z</a></p>
+        </div>
+    </div>
+</body>
+</html>
